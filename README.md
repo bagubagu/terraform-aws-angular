@@ -52,23 +52,25 @@ If hosted_zone is `example_com`:
 
 ## FAQ
 
-1.  I got following error
+### I got InvalidViewerCertificate error
 
-    ```
-    Error: Error applying plan:
+It's a bug. Please re-run `terraform apply` and you should be be fine the second time.
 
-    1 error(s) occurred:
+```
+Error: Error applying plan:
 
-    * module.spa.aws_cloudfront_distribution.origin: 1 error(s) occurred:
+1 error(s) occurred:
 
-    * aws_cloudfront_distribution.origin: error creating CloudFront Distribution: InvalidViewerCertificate: The specified SSL certificate doesn't exist, isn't in us-east-1 region, isn't valid, or doesn't include a valid certificate chain.
-        status code: 400, request id: 68fae058-72bc-11e8-a266-5d955149d452
-    ```
+* module.spa.aws_cloudfront_distribution.origin: 1 error(s) occurred:
+
+* aws_cloudfront_distribution.origin: error creating CloudFront Distribution: InvalidViewerCertificate: The specified SSL certificate doesn't exist, isn't in us-east-1 region, isn't valid, or doesn't include a valid certificate chain.
+    status code: 400, request id: 68fae058-72bc-11e8-a266-5d955149d452
+```
 
 
-    __Answer:__
+### I am unable to delete lambda at edge function
 
-    It's a bug. Please re-run `terraform apply` and you should be be fine the second time.
+You can not manually remove them. See [lambda-edge-delete-repli](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-edge-delete-replicas.html)
 
 ## LICENSE
 
