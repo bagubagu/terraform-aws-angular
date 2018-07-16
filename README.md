@@ -4,27 +4,33 @@ Create AWS infrastructure resources for Angular application.
 
 ## How to use
 
-1.  create a `infra/main.tf` in your project root directory. Replace the `aws.profile` and `spa.hosted_zone`. Do not change the `aws.region`, ACM certificate is required to be in `us-east-1`.
+1. Start from `your-project` directory. Change the value of 
+`aws.profile` and `angular.hosted_zone` below.
 
-    ```terraform
-    # main.tf
-
-    provider "aws" {
-        region  = "us-east-1"
-        profile = "exampleAdmin"
-    }
-
-    module "angular" {
-        source        = "github.com/bagubagu/terraform-aws-angular"
-        hosted_zone   = "example.com"
-        force_destroy = true
-    }
-    ```
-
+	``` bash
+	cd your-project
+	mkdir infra
+	cd infra
+	
+	# create main.tf
+	cat << EOF > main.tf
+	provider "aws" {
+	    region  = "us-east-1"
+	    profile = "exampleAdmin"
+	}
+	
+	module "angular" {
+	    source        = "github.com/bagubagu/terraform-aws-angular"
+	    hosted_zone   = "example.com"
+	    # uncomment if you want to force delete s3 buckets on destroy
+	    # force_destroy = true
+	}
+	EOF
+	```
+	
 1.  Init and run terraform apply from the `infra` directory
 
     ```bash
-    cd infra
     terraform init
     terraform apply
     ```
