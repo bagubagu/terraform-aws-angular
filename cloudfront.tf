@@ -71,6 +71,4 @@ resource "aws_cloudfront_distribution" "origin" {
 
     # minimum_protocol_version = "TLSv1.1_2016"
   }
-
-  tags {}
 }
