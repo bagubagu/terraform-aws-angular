@@ -30,15 +30,3 @@ output "cloudfront_distribution_id" {
 output "cloudfront_distribution_arn" {
   value = "${aws_cloudfront_distribution.origin.arn}"
 }
-
-output "lambda_origin_request_qualified_arn" {
-  value = "${aws_lambda_function.origin_request.qualified_arn}"
-}
-
-output "lambda_origin_response_qualified_arn" {
-  value = "${aws_lambda_function.origin_response.qualified_arn}"
-}
-
-output "lambda_viewer_response_qualified_arn" {
-  value = "${aws_lambda_function.viewer_response.qualified_arn}"
-}

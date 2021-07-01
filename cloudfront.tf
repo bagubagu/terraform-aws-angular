@@ -42,21 +42,6 @@ resource "aws_cloudfront_distribution" "origin" {
         forward = "none"
       }
     }
-
-    lambda_function_association {
-      event_type = "origin-request"
-      lambda_arn = "${aws_lambda_function.origin_request.qualified_arn}"
-    }
-
-    lambda_function_association {
-      event_type = "origin-response"
-      lambda_arn = "${aws_lambda_function.origin_response.qualified_arn}"
-    }
-
-    lambda_function_association {
-      event_type = "viewer-response"
-      lambda_arn = "${aws_lambda_function.viewer_response.qualified_arn}"
-    }
   }
 
   restrictions {
