@@ -10,7 +10,7 @@ resource "aws_acm_certificate" "cert" {
   validation_method         = "DNS"
   tags                      = {}
 }
-[for record in aws_route53_record.existing : record.fqdn]
+
 resource "aws_route53_record" "cert_validation" {
   name            = tolist(aws_acm_certificate.cert[each.key].domain_validation_options)[0].resource_record_name
   type            = tolist(aws_acm_certificate.cert[each.key].domain_validation_options)[0].resource_record_type
