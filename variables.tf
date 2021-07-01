@@ -9,6 +9,3 @@ variable "force_destroy" {
 variable "region" {
   default = "us-east-1"
 }
-
-  region           = "${var.region}"
-  s3_origin_id     = "${var.bucket}"
