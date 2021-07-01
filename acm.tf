@@ -12,9 +12,9 @@ resource "aws_acm_certificate" "cert" {
 }
 
 resource "aws_route53_record" "cert_validation" {
-  name            = tolist(aws_acm_certificate.cert[each.key].domain_validation_options)[0].resource_record_name
-  type            = tolist(aws_acm_certificate.cert[each.key].domain_validation_options)[0].resource_record_type
-  records         = [tolist(aws_acm_certificate.cert[each.key].domain_validation_options)[0].resource_record_value]
+  name            = tolist(aws_acm_certificate.cert["${var.hosted_zone}"].domain_validation_options)[0].resource_record_name
+  type            = tolist(aws_acm_certificate.cert["${var.hosted_zone}"].domain_validation_options)[0].resource_record_type
+  records         = [tolist(aws_acm_certificate.cert["${var.hosted_zone}"].domain_validation_options)[0].resource_record_value]
   zone_id = "${data.aws_route53_zone.zone.id}"
   ttl     = 60
 }
