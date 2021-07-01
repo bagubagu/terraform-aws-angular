@@ -1,7 +1,7 @@
 # spa/hosting_and_cdnlog_buckets
 
 resource "aws_s3_bucket" "origin" {
-  region        = "${local.region}"
+  region        = "${var.region}"
   bucket        = "${local.origin_bucket}"
   acl           = "private"
   force_destroy = "${var.force_destroy}"
@@ -19,7 +19,7 @@ resource "aws_s3_bucket" "origin" {
 }
 
 resource "aws_s3_bucket" "log" {
-  region        = "${local.region}"
+  region        = "${var.region}"
   bucket        = "${local.log_bucket}"
   acl           = "log-delivery-write"
   force_destroy = "${var.force_destroy}"
