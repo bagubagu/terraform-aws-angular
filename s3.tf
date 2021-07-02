@@ -46,3 +46,24 @@ data "aws_iam_policy_document" "origin" {
     }
   }
 }
+
+data "aws_iam_policy_document" "deploy_policy" {
+  statement {
+    actions = [
+      "s3:GetObject",
+      "s3:ListBucket",
+      "s3:WriteObject",
+      "s3:DeleteObject",
+    ]
+
+    resources = [
+      "${aws_s3_bucket.origin.arn}",
+      "${aws_s3_bucket.origin.arn}/*",
+    ]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${var.deploy_policy_arn}"]
+    }
+  }
+}
