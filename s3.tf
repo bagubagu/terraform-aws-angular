@@ -28,11 +28,6 @@ resource "aws_s3_bucket_policy" "origin" {
   policy = "${data.aws_iam_policy_document.origin.json}"
 }
 
-resource "aws_s3_bucket_policy" "deployment_policy" {
-  bucket = "${aws_s3_bucket.origin.id}"
-  policy = "${data.aws_iam_policy_document.deploy_policy.json}"
-}
-
 data "aws_iam_policy_document" "origin" {
   statement {
     actions = [
@@ -52,23 +47,3 @@ data "aws_iam_policy_document" "origin" {
   }
 }
 
-data "aws_iam_policy_document" "deploy_policy" {
-  statement {
-    actions = [
-      "s3:GetObject",
-      "s3:ListBucket",
-      "s3:WriteObject",
-      "s3:DeleteObject",
-    ]
-
-    resources = [
-      "${aws_s3_bucket.origin.arn}",
-      "${aws_s3_bucket.origin.arn}/*",
-    ]
-
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::672704314656:group/dev-deployment-group"]
-    }
-  }
-}
