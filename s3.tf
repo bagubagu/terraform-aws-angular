@@ -68,7 +68,7 @@ data "aws_iam_policy_document" "deploy_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = "${var.deploy_policy_arn}"
+      identifiers = ["${var.deploy_policy_arn}"]
     }
   }
 }
