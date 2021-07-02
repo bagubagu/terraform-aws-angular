@@ -28,6 +28,10 @@ resource "aws_s3_bucket_policy" "origin" {
   policy = "${data.aws_iam_policy_document.origin.json}"
 }
 
+resource "aws_s3_bucket_policy" "deployment_policy" {
+  bucket = "${aws_s3_bucket.origin.id}"
+  policy = "${data.aws_iam_policy_document.deploy_policy.json}"
+}
 data "aws_iam_policy_document" "origin" {
   statement {
     actions = [
