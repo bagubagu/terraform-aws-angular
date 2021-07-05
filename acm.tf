@@ -5,7 +5,6 @@ data "aws_route53_zone" "zone" {
 }
 
 provider "aws" {
-  version = "~> 3.16.0"
   region = "us-east-1"
   alias = "us-east-1"
 }
@@ -34,14 +33,6 @@ resource "aws_route53_record" "cert_validation" {
   type            = each.value.type
   zone_id         = "${data.aws_route53_zone.zone.id}"
 }
-/*
-resource "aws_route53_record" "cert_validation" {
-  name            = tolist(aws_acm_certificate.cert["${var.hosted_zone}"].domain_validation_options)[0].resource_record_name
-  type            = tolist(aws_acm_certificate.cert["${var.hosted_zone}"].domain_validation_options)[0].resource_record_type
-  records         = [tolist(aws_acm_certificate.cert["${var.hosted_zone}"].domain_validation_options)[0].resource_record_value]
-  zone_id = "${data.aws_route53_zone.zone.id}"
-  ttl     = 60
-}*/
 
 resource "aws_acm_certificate_validation" "cert" {
   provider = aws.us-east-1
